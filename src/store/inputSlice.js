@@ -9,9 +9,15 @@ export const inputReducer = createReducer(
       state.list.push({ elem: crypto.randomUUID(), fade: false });
     },
     updateFade: (state, action) => {
-      state.list.forEach((item) => {
-        if (item.elem === action.payload) item.fade = !item.fade;
-      });
+      //   state.list.forEach((item) => {
+      //     if (item.elem === action.payload) item.fade = !item.fade;
+      //   });
+      return {
+        ...state,
+        list: state.list.map((l) =>
+          l.elem === action.payload ? { ...l, fade: !l.fade } : { ...l }
+        ),
+      };
     },
   }
 );
